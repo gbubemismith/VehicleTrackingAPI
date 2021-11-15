@@ -1,0 +1,28 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
+
+version: '3.4'
+
+services:
+  trackingDb:
+    container_name: trackingDb
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_DATABASE: TrackingDb
+      MYSQL_USER: peakuser
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - ./mysql:/var/lib/mysql
+  vehicleapi:
+    container_name: vehicleapi
+    restart: on-failure
+    image: vehicleapi
+    environment:
+      - DBHOST=trackingDb
+      - ASPNETCORE_ENVIRONMENT=Development
+      - 'ConnectionStrings:TrackingConnection=server=trackingDb;Uid=peakuser;Pwd=password;Database=TrackingDb'
+    depends_on: 
+      - trackingDb
+    ports:
+      - '8000:80'
