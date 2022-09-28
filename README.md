@@ -26,7 +26,7 @@ and configure the connection string in the appsettings.json accordingly with the
 
 HOW THE APPLICATION WORKS
 
-* We have four major entities Users(Idntity tables are created for user and roles), Vehicles, Devices and Locations. 
+* We have four major entities Users(Identity tables are created for user and roles), Vehicles, Devices and Locations. 
 * The VehicleTrackingApi sloutin has 3 projects which follow clean architecture
   - API : The layer contains the api implementations
   - Core : contains DTOs and entities
